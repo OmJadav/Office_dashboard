@@ -1,3 +1,3 @@
-const backendUrl = "http://localhost:8080"
+const backendUrl = "https://dashboard-rkyh.onrender.com"
 
 module.exports = backendUrl
