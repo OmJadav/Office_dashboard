@@ -21,7 +21,7 @@ function Login() {
       localStorage.setItem("currentUser", JSON.stringify(response.data.user));
 
       Swal.fire("Success", response.data.message, "success").then(
-        () => (window.location.href = "/")
+        () => (window.location.href = "/home")
       );
       console.log("Form submitted:", data);
     } catch (error) {

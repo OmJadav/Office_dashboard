@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Dropdown } from "flowbite-react";
 const user = JSON.parse(localStorage.getItem("currentUser"));
 const navigation = [
-  { name: "Home", link: "/", current: false },
+  { name: "Home", link: "/home", current: false },
   { name: "Expenses", link: "/expenses", current: false },
   { name: "Report", link: "/report", current: false },
 ];
@@ -29,7 +29,7 @@ export default function Navbar() {
                 <div className="flex h-16 items-center justify-between">
                   <div className="flex items-center">
                     <div>
-                      <Link to={"/"}>
+                      <Link to={"/home"}>
                         <p className="text-white text-2xl font-bold">
                           Shraddha Computers
                         </p>

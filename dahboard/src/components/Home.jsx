@@ -111,7 +111,7 @@ export default function Home() {
                 <Table.Cell>{product.cust_name}</Table.Cell>
                 <Table.Cell>{formatDate(product.dop)}</Table.Cell>
                 <Table.Cell>
-                  <Link to={`edit/${product._id}`}>
+                  <Link to={`/edit/${product._id}`}>
                     {" "}
                     <Button color="success">Edit</Button>
                   </Link>

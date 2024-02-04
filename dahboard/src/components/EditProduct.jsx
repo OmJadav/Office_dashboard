@@ -54,7 +54,7 @@ export default function Edit() {
         data
       );
       Swal.fire("Success", response.data.message, "success").then(() => {
-        navigate("/");
+        navigate("/home");
       });
       console.log(response.data.message);
     } catch (error) {
@@ -69,7 +69,7 @@ export default function Edit() {
       const response = await axios
         .get(`${backendUrl}/delete/${productId}`)
         .then(() => {
-          window.location.href = "/";
+          window.location.href = "/home";
         });
       console.log(response.message);
     } catch (error) {

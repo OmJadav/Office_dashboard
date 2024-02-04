@@ -14,7 +14,7 @@ const Layout = () => {
   return user.isAdmin ? (
     <Outlet />
   ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
+    <Navigate to="/" state={{ from: location }} replace />
   )
 }
 
@@ -25,13 +25,13 @@ function App() {
 
       <Routes>
         <Route element={<Layout />}>
-          <Route path='/' element={<Homepage />} />
+          <Route path='/home' element={<Homepage />} />
           <Route path='/edit/:productId' element={<Editpage />} />
           <Route path='/report' element={<Reportpage />} />
           <Route path='/expenses' element={<Expensespage />} />
         </Route>
-        <Route path='/login' element={<Login />} />
-        <Route path="*" element={<Navigate to='/login' />} />
+        <Route path='/' element={<Login />} />
+        <Route path="*" element={<Navigate to='/' />} />
       </Routes>
     </BrowserRouter>
   );
