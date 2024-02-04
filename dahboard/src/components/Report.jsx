@@ -4,6 +4,7 @@ import axios from "axios";
 import backendUrl from "../urlHelper/urlHelper";
 import { useReactToPrint } from "react-to-print";
 import { Button, Table } from "flowbite-react";
+import Loader from "./Loader";
 import { Link } from "react-router-dom";
 import {
   calculateQuantitySold,
@@ -12,12 +13,15 @@ import {
 } from "../utils";
 const { RangePicker } = DatePicker;
 function Report() {
+  const [loading, setloading] = useState(true);
   const [products, setProducts] = useState([]);
   const [dateRange, setDateRange] = useState([]);
 
   const componentPDF = useRef();
   const fetchDataByDateRange = async (start, end) => {
     try {
+      setloading(true);
+
       const response = await axios.get(`${backendUrl}/fetchby-date`, {
         params: {
           start,
@@ -25,7 +29,10 @@ function Report() {
         },
       });
       setProducts(response.data);
+      setloading(false);
     } catch (error) {
+      setloading(false);
+
       console.error("Error fetching products:", error);
     }
   };
@@ -71,13 +78,15 @@ function Report() {
               )}
             </h1>
           </div>
+          {loading && <Loader />}
+
           <Table hoverable>
             <Table.Head>
               <Table.HeadCell>Sr No.</Table.HeadCell>
               <Table.HeadCell>Customer Name</Table.HeadCell>
               <Table.HeadCell>Product name</Table.HeadCell>
               <Table.HeadCell>Date of Purchase</Table.HeadCell>
-              <Table.HeadCell>My Rate</Table.HeadCell>
+              {/* <Table.HeadCell>My Rate</Table.HeadCell> */}
               <Table.HeadCell>Quantity</Table.HeadCell>
               <Table.HeadCell>Customer Rate</Table.HeadCell>
               <Table.HeadCell>Total Amount</Table.HeadCell>
@@ -94,7 +103,7 @@ function Report() {
                   </Table.Cell>
                   <Table.Cell>{product.product_name}</Table.Cell>
                   <Table.Cell>{formatDate(product.dop)}</Table.Cell>
-                  <Table.Cell>₹ {product.my_rate}</Table.Cell>
+                  {/* <Table.Cell>₹ {product.my_rate}</Table.Cell> */}
                   <Table.Cell>{product.quantity}</Table.Cell>
                   <Table.Cell>₹ {product.price}</Table.Cell>
                   <Table.Cell>₹ {product.quantity * product.price}</Table.Cell>

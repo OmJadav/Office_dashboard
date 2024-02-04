@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const Product = require("../models/productModel")
+const User = require("../models/userModel")
 
 router.post("/add-product", async (req, res) => {
     const { product_name, my_rate, quantity, price, cust_name, dop, remarks } = req.body
@@ -80,5 +81,32 @@ router.get("/fetchby-date", async (req, res) => {
     }
 });
 
+
+router.post("/login", async (req, res) => {
+    // console.log(req.body);
+    const { email, password } = req.body;
+
+    try {
+
+        const userfound = await User.findOne({ email: email, password: password })
+
+        if (userfound) {
+            const response = { name: userfound.name, email: userfound.email, isAdmin: userfound.isAdmin, _id: userfound._id, }
+            res.status(201).json({ user: response, message: "User Logged in" })
+        } else {
+            const emailFound = await user.findOne({ email: email });
+
+            if (emailFound) {
+                return res.status(400).json({ error: "Incorrect Password. Try again" });
+            } else {
+                return res.status(400).json({ error: "User not found" });
+            }
+        }
+
+    } catch (error) {
+        res.status(400).json({ error: "Login Error..." })
+    }
+
+})
 
 module.exports = router;

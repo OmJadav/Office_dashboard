@@ -5,6 +5,7 @@ import axios from "axios";
 import backendUrl from "../urlHelper/urlHelper";
 import AddProduct from "./AddProduct";
 import { Link } from "react-router-dom";
+import Loader from "./Loader";
 import {
   calculateQuantitySold,
   calculateTotalProfit,
@@ -12,19 +13,20 @@ import {
 } from "../utils";
 
 export default function Home() {
+  const [loading, setloading] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [products, setproducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        // setloading(true);
+        setloading(true);
 
         const response = await axios.get(`${backendUrl}/all-product`);
         setproducts(response.data);
-        // setloading(false);
+        setloading(false);
       } catch (error) {
-        // setloading(false);
+        setloading(false);
 
         console.log(" Employee fetching Error:", error);
       }
@@ -45,6 +47,7 @@ export default function Home() {
 
   return (
     <>
+      {loading && <Loader />}
       <div className="mb-5 text-center font-bold ">
         <Table hoverable>
           <Table.Body>

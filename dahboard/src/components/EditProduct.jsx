@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
-// import Loader from "./Loader";
+import Loader from "./Loader";
 import Swal from "sweetalert2";
 import backendUrl from "../urlHelper/urlHelper";
 
@@ -16,7 +16,7 @@ export default function Edit() {
     setValue,
     formState: { errors },
   } = useForm();
-  // let [loading, setLoading] = useState(true);
+  let [loading, setLoading] = useState(true);
   let [productName, setProductName] = useState("");
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -27,9 +27,8 @@ export default function Edit() {
   useEffect(() => {
     const fetchEmpById = async () => {
       try {
-        // setLoading(true);
+        setLoading(true);
         const response = await axios.get(`${backendUrl}/view/${productId}`);
-        // setEmpDetails(response.data);
         setProductName(response.data.product_name);
         setValue("product_name", response.data.product_name);
         setValue("my_rate", response.data.my_rate);
@@ -39,9 +38,9 @@ export default function Edit() {
         setValue("dop", response.data.dop);
         setValue("remarks", response.data.remarks);
 
-        // setLoading(false);
+        setLoading(false);
       } catch (error) {
-        // setLoading(false);
+        setLoading(false);
         console.log("Error edit by id axios:", error);
       }
     };
@@ -80,14 +79,14 @@ export default function Edit() {
 
   return (
     <>
-      {/* {loading && <Loader />} */}
-
       {/* empform edit starts here / */}
       <form
         className="flex  flex-col gap-4 mr-1 ml-1 "
         noValidate
         onSubmit={handleSubmit(updateDetails)}
       >
+        {loading && <Loader />}
+
         <div>
           <div className="mb-2 block">
             <Label htmlFor="product_name" value="Product Name" />
