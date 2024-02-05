@@ -101,7 +101,7 @@ export default function Home() {
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"
               >
                 <Table.Cell>{index + 1}</Table.Cell>
-                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                <Table.Cell className="wrap-text font-medium text-gray-900 dark:text-white">
                   {product.product_name}
                 </Table.Cell>
                 <Table.Cell>₹ {product.my_rate}</Table.Cell>
