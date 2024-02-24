@@ -28,7 +28,6 @@ export default function Home() {
   const npage = Math.ceil(totalItems / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
 
-  // const totalPages = Math.ceil(products.length / recordsPerPage);
   const prePage = () => {
     if (currentPage !== firstIndex) {
       setCurrentPage(currentPage - 1);
