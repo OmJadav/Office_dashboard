@@ -64,7 +64,7 @@ function Report() {
     <>
       <Space direction="vertical" style={{ width: "100%" }}>
         <div>
-          <h1>Select Date to PDF your statistics</h1>
+          <h1>Select Date to get PDF report </h1>
           <RangePicker onChange={handleDateChange} />
         </div>
         <div ref={componentPDF}>

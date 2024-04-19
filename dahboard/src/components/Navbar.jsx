@@ -17,7 +17,7 @@ export default function Navbar() {
   const { pathname } = useLocation();
   const signOut = () => {
     localStorage.removeItem("currentUser");
-    window.location.href = "/login";
+    window.location.href = "/";
   };
   return (
     <>
